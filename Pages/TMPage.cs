@@ -1,4 +1,5 @@
 ﻿using june2021.Utility;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,12 @@ namespace june2021.Pages
         IWebElement lastpage;
         IWebElement descriptionbox;
         IWebElement Sbutton;
-       IWebElement actulcode;
+        IWebElement actulcode;
         //Test Create TM
         public void CreateTM(IWebDriver driver)
         {
             //open creat new page
-            IWebElement CreateNewButton = driver.FindElement(By.XPath("//*[@id='container']/p/a"));
+            IWebElement CreateNewButton =driver.FindElement(By.XPath("//*[@id='container']/p/a"));
             CreateNewButton.Click();
             Wait.WaitForWebElementtoExits(driver,"XPath","//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]", 2);
         
@@ -46,12 +47,13 @@ namespace june2021.Pages
             //click on save button
             Sbutton = driver.FindElement(By.Id("SaveButton"));
             Sbutton.Click();
-            Wait.WaitForWebElementtoExits(driver,"XPath","//*[@id='tmsGrid']/div[4]/a[4]/span",2);
-
+            Thread.Sleep(3000);
+            // Wait.WaitForWebElementtoExits(driver,"XPath","//*[@id='tmsGrid']/div[4]/a[4]/span",5);
+            
             //click goto last page 
             lastpage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
             lastpage.Click();
-            Wait.WaitForWebElementtoExits(driver,"XPath","//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 1);
+            Wait.WaitForWebElementtoExits(driver,"XPath","//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 5);
 
 
             //check if the created record is present in the table and had expected value //*[@id="TimeMaterialEditForm"]/div/div[1]/div/span[1]/span/span[1]
@@ -59,20 +61,27 @@ namespace june2021.Pages
             actulcode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
             if (actulcode.Text == "456")
             {
-                Console.WriteLine("materiar record created succfully test pass");
+                Assert.Pass("materiar record created succfully test pass");
             }
 
             else
             {
-                Console.WriteLine("test fail");
+                Assert.Fail("test fail");
             }
-           
+
 
         }
 
         //Test Edit TM
         public void EditTM(IWebDriver driver)
         {
+            Thread.Sleep(2000);
+            lastpage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            lastpage.Click();
+             Thread.Sleep(1500);
+            //Wait.WaitForWebElementtoExits(driver, "XPath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 5);
+
+
             Wait.WaitForWebElementtoExits(driver,"XPath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]", 2);
             IWebElement editbutton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
             editbutton.Click();
@@ -108,53 +117,57 @@ namespace june2021.Pages
             //click on save button
             Sbutton = driver.FindElement(By.Id("SaveButton"));
             Sbutton.Click();
-            //Thread.Sleep(3500);
-            Wait.WaitForWebElementtoExits(driver, "XPath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 3);
+            Thread.Sleep(2500);
+           // Wait.WaitForWebElementtoExits(driver, "XPath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 5);
 
             //click goto last page 
             lastpage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
             lastpage.Click();
             // Thread.Sleep(1500);
-            Wait.WaitForWebElementtoExits(driver, "XPath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 3);
+            //Wait.WaitForWebElementtoExits(driver, "XPath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 5);
 
             //check if the edited record is present in the table and had expected value 
             actulcode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
             if (actulcode.Text == "789")
             {
-                Console.WriteLine("materiar record edited succfully test pass");
+                Assert.Pass("materiar record edited succfully test pass");
             }
 
             else
             {
-                Console.WriteLine("test fail");
+                Assert.Fail("test fail");
             }
         }
         //Test Delete TM 
         public void DeleteTM(IWebDriver driver)
         {
+            Thread.Sleep(2000);
+            lastpage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            lastpage.Click();
+            Wait.WaitForWebElementtoExits(driver, "XPath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 5);
+
             //identidy 
             IWebElement Dbutton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
             Dbutton.Click();
             Thread.Sleep(2000);
             driver.SwitchTo().Alert().Accept();
-            Wait.WaitForWebElementtoExits(driver, "XPath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 3);
-
+            Wait.WaitForWebElementtoExits(driver, "XPath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 5);
+           
             lastpage = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
             lastpage.Click();
-            Wait.WaitForWebElementtoExits(driver, "XPath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 2);
+            Wait.WaitForWebElementtoExits(driver, "XPath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 5);
            
             //check if the  record is present record is deleted s
             actulcode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
             if (actulcode.Text == "789")
             {
-                Console.WriteLine("test fail");
+                Assert.Fail("test fail");
             }
 
             else
             {
-                Console.WriteLine("Record deleted succfully test pass");
-
-
+                
+                Assert.Pass("Record deleted succfully test pass",actulcode.Text);
             }
 
         }

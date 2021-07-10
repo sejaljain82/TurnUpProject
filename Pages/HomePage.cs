@@ -10,6 +10,7 @@ namespace june2021.Pages
     class HomePage
     {
         public void GoToTMPage(IWebDriver driver)
+        
         {
             //identify the Administratoion dropdown
 
@@ -20,8 +21,8 @@ namespace june2021.Pages
             //identify the Time and Material button
             IWebElement TMB = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
             TMB.Click();
-           
-
+            Thread.Sleep(2000);
+            
 
         }
     }
