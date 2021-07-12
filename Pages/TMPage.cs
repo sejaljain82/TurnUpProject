@@ -30,7 +30,7 @@ namespace june2021.Pages
             DDbox = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]"));
             DDbox.Click();
 
-            //identify code and input code//*[@id="TypeCode"]
+            //identify code and input code
             codebox = driver.FindElement(By.Id("Code"));
             codebox.SendKeys("456");
 

@@ -10,59 +10,51 @@ using OpenQA.Selenium.Chrome;
 namespace june2021
 {
     [TestFixture]
+    [Parallelizable]
     class Program : CommonDriver
     {
-       // static void Main(string[] args)
-     //   {
-      //      Console.WriteLine("Hello World!");
+        // static void Main(string[] args)
+        //   {
+        //      Console.WriteLine("Hello World!");
 
-            // open chrome browser
-
-
-            //Test the Creat New ,Edit and Delete funtion by creating TM Paje object 
-           
-
-       // }
-
-        [SetUp]
-        public void LoginSteps()
-        {
-            driver = new ChromeDriver(@"C:\Sejal\Industry Connect\week2\june2021");
-            Thread.Sleep(500);
-
-            driver.Manage().Window.Maximize();
-            Thread.Sleep(500);
+        // open chrome browser
 
 
-            // Test Login page by Creating the LoginPage object and login function
-            LoginPage loginobj = new LoginPage();
-            loginobj.Login(driver);
+        //Test the Creat New ,Edit and Delete funtion by creating TM Paje object 
 
-            //Test the navigation to Time and Material Page by creating Homepage object
-            HomePage homePageobj = new HomePage();
-            homePageobj.GoToTMPage(driver);
-        }
+
+        // }
+
+        HomePage homePageobj = new HomePage();
+        TMPage TMPageobj = new TMPage();
+
         [Test]
         public void CreatTMTest()
         {
-            TMPage TMPageobj = new TMPage();
+            //Test the navigation to Time and Material Page by creating Homepage object
+            homePageobj.GoToTMPage(driver);
+
+            //Create new Time and  Material record
             TMPageobj.CreateTM(driver);
         }
         [Test]
         public void EditTMTest()
         {
-            TMPage TMPageobj = new TMPage();
+            //Test the navigation to Time and Material Page by creating Homepage object
+            homePageobj.GoToTMPage(driver);
+
+            //Edit Time and  Material record
             TMPageobj.EditTM(driver);
         }
         [Test]
         public void DeleteTMTest()
-        {
-            TMPage TMPageobj = new TMPage();
-            TMPageobj.DeleteTM(driver);
+        { 
+            //Test the navigation to Time and Material Page by creating Homepage object
+            homePageobj.GoToTMPage(driver);
+
+            //Delete Time and Material record
+             TMPageobj.DeleteTM(driver);
         }
-        [TearDown]
-        public void ClosetestRun()
-        {
-        }
+       
     }
 }

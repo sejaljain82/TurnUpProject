@@ -9,6 +9,7 @@ namespace june2021.Pages
 {
     class HomePage
     {
+        //Function to navigate to Tme and Material Page
         public void GoToTMPage(IWebDriver driver)
         
         {
@@ -23,6 +24,23 @@ namespace june2021.Pages
             TMB.Click();
             Thread.Sleep(2000);
             
+
+        }
+        //Function to navigate to Employees Page
+        public void GoToEmployeesPage(IWebDriver driver)
+
+        {
+            //identify the Administratoion dropdown
+
+            IWebElement adimin = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a/span"));
+            adimin.Click();
+            Wait.WaitForWebElementtoExits(driver, "XPath", "/html/body/div[3]/div/div/ul/li[5]/ul/li[2]/a", 1);
+
+            //identify the Employees button
+            IWebElement EmployeesB = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[2]/a"));
+            EmployeesB.Click();
+            Thread.Sleep(2000);
+
 
         }
     }
