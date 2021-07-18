@@ -36,7 +36,15 @@ namespace june2021.Pages
             //set Username
             UsernameBox = driver.FindElement(By.Id("Username"));
             UsernameBox.SendKeys("Tom1");
-         
+           /// var winHandleBefour = driver.CurrentWindowHandle;
+           // IWebElement EditContactB = driver.FindElement(By.XPath("//*[@class='form-group']/div[1]/button "));
+           // EditContactB.Click();
+            // Switch to new window opened
+           // for (String winHandle : driver.CurrentWindowHandle);
+               // .getWindowHandles())
+           // {
+           //     driver.switchTo().window(winHandle);
+           // }
             Password = driver.FindElement(By.Id("Password"));
             Password.SendKeys("123$Abcd");
            

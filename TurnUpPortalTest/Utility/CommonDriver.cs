@@ -16,7 +16,7 @@ namespace june2021.Utility
         [OneTimeSetUp]
         public void LoginSteps()
         {
-            driver = new ChromeDriver(@"C:\Sejal\Industry Connect\week2\june2021");
+            driver = new ChromeDriver(@"C:\Sejal\Industry Connect\week2\june2021\ThumUpPotalTest");
             Thread.Sleep(500);
 
             driver.Manage().Window.Maximize();

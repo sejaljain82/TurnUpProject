@@ -1,0 +1,782 @@
+{
+	"info": {
+		"_postman_id": "3cef3101-417a-4a94-8d9c-bdb1071ff7dc",
+		"name": "IC_API1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateOder_TC",
+			"item": [
+				{
+					"name": "PostCreatNewRecord",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var jsonData=pm.response.json();\r",
+									"\r",
+									"//Postting oog on console\r",
+									"console.log(jsonData.firstName);\r",
+									"console.log(jsonData.id);\r",
+									"\r",
+									"// Setting Environment variable\r",
+									"pm.environment.set(\"id\", jsonData.id);\r",
+									"pm.environment.set(\"FstName\", jsonData.firstName);\r",
+									"pm.environment.set(\"LstName\", jsonData.lastName);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"addressLine1\": \"abc\",\r\n  \"addressLine2\": \"abc2\",\r\n  \"city\": \"abc1\",\r\n  \"comment\": \"efg\",\r\n  \"email\": \"ab@ef.com\",\r\n  \"firstName\": \"Tom\",\r\n  \"id\": 0,\r\n  \"itemNumber\": 1,\r\n  \"lastName\": \"zyx\",\r\n  \"phone\": \"1234567890\",\r\n  \"state\": \"AL\",\r\n  \"zipCode\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRecordById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validating FirsName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    var actulFirstName= jsonData.firstName;//from response\r",
+									"    var expectedFirstName =pm.environment.get(\"FstName\");//from environment\r",
+									"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+									"    pm.expect(actulFirstName).to.eql(expectedFirstName);\r",
+									"});\r",
+									"pm.test(\"Validating Objects\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+									"    pm.expect(jsonData.firstName).to.eql(pm.environment.get(\"FstName\"));\r",
+									"    pm.expect(jsonData.lastName).to.eql(pm.environment.get(\"LstName\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder/{{id}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteRecordById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder/{{id}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ReadOder_TC",
+			"item": [
+				{
+					"name": "PostCreatNewRecord",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var jsonData=pm.response.json();\r",
+									"\r",
+									"//Postting oog on console\r",
+									"console.log(jsonData.firstName);\r",
+									"console.log(jsonData.id);\r",
+									"\r",
+									"// Setting Environment variable\r",
+									"pm.environment.set(\"id\", jsonData.id);\r",
+									"pm.environment.set(\"FstName\", jsonData.firstName);\r",
+									"pm.environment.set(\"LstName\", jsonData.lastName);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"addressLine1\": \"abc\",\r\n  \"addressLine2\": \"abc2\",\r\n  \"city\": \"abc1\",\r\n  \"comment\": \"efg\",\r\n  \"email\": \"ab@ef.com\",\r\n  \"firstName\": \"Tom\",\r\n  \"id\": 0,\r\n  \"itemNumber\": 1,\r\n  \"lastName\": \"zyx\",\r\n  \"phone\": \"1234567890\",\r\n  \"state\": \"AL\",\r\n  \"zipCode\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRecordById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validating FirsName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    var actulFirstName= jsonData.firstName;//from response\r",
+									"    var expectedFirstName =pm.environment.get(\"FstName\");//from environment\r",
+									"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+									"    pm.expect(actulFirstName).to.eql(expectedFirstName);\r",
+									"});\r",
+									"pm.test(\"Validating Objects\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+									"    pm.expect(jsonData.firstName).to.eql(pm.environment.get(\"FstName\"));\r",
+									"    pm.expect(jsonData.lastName).to.eql(pm.environment.get(\"LstName\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder/{{id}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UpdateOder_TC",
+			"item": [
+				{
+					"name": "PostCreatNewRecord",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var jsonData=pm.response.json();\r",
+									"\r",
+									"//Postting oog on console\r",
+									"console.log(jsonData.firstName);\r",
+									"console.log(jsonData.id);\r",
+									"\r",
+									"// Setting Environment variable\r",
+									"pm.environment.set(\"id\", jsonData.id);\r",
+									"pm.environment.set(\"FstName\", jsonData.firstName);\r",
+									"pm.environment.set(\"LstName\", jsonData.lastName);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"addressLine1\": \"abc\",\r\n  \"addressLine2\": \"abc2\",\r\n  \"city\": \"abc1\",\r\n  \"comment\": \"efg\",\r\n  \"email\": \"ab@ef.com\",\r\n  \"firstName\": \"Tom\",\r\n  \"id\": 0,\r\n  \"itemNumber\": 1,\r\n  \"lastName\": \"zyx\",\r\n  \"phone\": \"1234567890\",\r\n  \"state\": \"AL\",\r\n  \"zipCode\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateRecordById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData=pm.response.json();\r",
+									"pm.environment.set(\"UpdatedComment\", jsonData.comment);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"addressLine1\": \"abc\",\r\n  \"addressLine2\": \"abc2\",\r\n  \"city\": \"abc11\",\r\n  \"comment\": \"efg455\",\r\n  \"email\": \"ab@ef.com\",\r\n  \"firstName\": \"Tom\",\r\n  \"id\": 0,\r\n  \"itemNumber\": 1,\r\n  \"lastName\": \"zyx\",\r\n  \"phone\": \"1234567890\",\r\n  \"state\": \"AL\",\r\n  \"zipCode\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder/{{id}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "Content-Type",
+									"value": "app",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRecordById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validating FirsName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    var actulFirstName= jsonData.firstName;//from response\r",
+									"    var expectedFirstName =pm.environment.get(\"FstName\");//from environment\r",
+									"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+									"    pm.expect(actulFirstName).to.eql(expectedFirstName);\r",
+									"});\r",
+									"pm.test(\"Validating Objects\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+									"    pm.expect(jsonData.firstName).to.eql(pm.environment.get(\"FstName\"));\r",
+									"    pm.expect(jsonData.lastName).to.eql(pm.environment.get(\"LstName\"));\r",
+									"    pm.expect(jsonData.comment).to.eql(pm.environment.get(\"UpdatedComment\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder/{{id}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteRecordById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder/{{id}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DeleteOder_TC",
+			"item": [
+				{
+					"name": "PostCreatNewRecord",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var jsonData=pm.response.json();\r",
+									"\r",
+									"//Postting oog on console\r",
+									"console.log(jsonData.firstName);\r",
+									"console.log(jsonData.id);\r",
+									"\r",
+									"// Setting Environment variable\r",
+									"pm.environment.set(\"id\", jsonData.id);\r",
+									"pm.environment.set(\"FstName\", jsonData.firstName);\r",
+									"pm.environment.set(\"LstName\", jsonData.lastName);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"addressLine1\": \"abc\",\r\n  \"addressLine2\": \"abc2\",\r\n  \"city\": \"abc1\",\r\n  \"comment\": \"efg\",\r\n  \"email\": \"ab@ef.com\",\r\n  \"firstName\": \"Tom\",\r\n  \"id\": 0,\r\n  \"itemNumber\": 1,\r\n  \"lastName\": \"zyx\",\r\n  \"phone\": \"1234567890\",\r\n  \"state\": \"AL\",\r\n  \"zipCode\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRecordById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validating FirsName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    var actulFirstName= jsonData.firstName;//from response\r",
+									"    var expectedFirstName =pm.environment.get(\"FstName\");//from environment\r",
+									"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+									"    pm.expect(actulFirstName).to.eql(expectedFirstName);\r",
+									"});\r",
+									"pm.test(\"Validating Objects\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+									"    pm.expect(jsonData.firstName).to.eql(pm.environment.get(\"FstName\"));\r",
+									"    pm.expect(jsonData.lastName).to.eql(pm.environment.get(\"LstName\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder/{{id}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteRecordById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder/{{id}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRecordById toValidateDelete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validating FirsName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    var actulFirstName= jsonData.firstName;//from response\r",
+									"    var expectedFirstName =pm.environment.get(\"FstName\");//from environment\r",
+									"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+									"    pm.expect(actulFirstName).to.eql(expectedFirstName);\r",
+									"});\r",
+									"pm.test(\"Validating Objects\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+									"    pm.expect(jsonData.firstName).to.eql(pm.environment.get(\"FstName\"));\r",
+									"    pm.expect(jsonData.lastName).to.eql(pm.environment.get(\"LstName\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder/{{id}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Data Validation",
+			"item": [
+				{
+					"name": "PostCreatNewRecord-EmailValidation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Email Validation \", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Email should be valid\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"propertyPath=email\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"addressLine1\": \"abc\",\r\n  \"addressLine2\": \"abc2\",\r\n  \"city\": \"abc1\",\r\n  \"comment\": \"efg\",\r\n  \"email\": \"ab\",\r\n  \"firstName\": \"Tom\",\r\n  \"id\": 0,\r\n  \"itemNumber\": 1,\r\n  \"lastName\": \"zyx\",\r\n  \"phone\": \"1234567890\",\r\n  \"state\": \"AL\",\r\n  \"zipCode\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostCreatNewRecord-PhonenumberValidation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Phonenumber  Validation \", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Phone number should be 10 digits\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"propertyPath=phone\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"addressLine1\": \"abc\",\r\n  \"addressLine2\": \"abc2\",\r\n  \"city\": \"abc1\",\r\n  \"comment\": \"efg\",\r\n  \"email\": \"ab@ef.com\",\r\n  \"firstName\": \"Tom\",\r\n  \"id\": 0,\r\n  \"itemNumber\": 1,\r\n  \"lastName\": \"zyx\",\r\n  \"phone\": \"12345670\",\r\n  \"state\": \"AL\",\r\n  \"zipCode\": \"123456\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Postdata using csv File",
+			"item": [
+				{
+					"name": "PostCreatNewRecordUsingcsv",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var jsonData=pm.response.json();\r",
+									"\r",
+									"//Postting oog on console\r",
+									"console.log(jsonData.firstName);\r",
+									"console.log(jsonData.id);\r",
+									"\r",
+									"// Setting Environment variable\r",
+									"pm.environment.set(\"id\", jsonData.id);\r",
+									"pm.environment.set(\"FstName\", jsonData.firstName);\r",
+									"pm.environment.set(\"LstName\", jsonData.lastName);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"addressLine1\": \"{{addressLine1}}\",\r\n  \"addressLine2\": \"{{addressLine2}}\",\r\n  \"city\": \"{{city}}\",\r\n  \"comment\": \"{{comment}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"firstName\": \"{{firstname}}\",\r\n  \"id\": 0,\r\n  \"itemNumber\": \"{{itemnumber}}\",\r\n  \"lastName\": \"{{lastname}}\",\r\n  \"phone\": \"{{phone}}\",\r\n  \"state\": \"{{state}}\",\r\n  \"zipCode\": \"{{zipcode}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRecordById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validating FirsName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    var actulFirstName= jsonData.firstName;//from response\r",
+									"    var expectedFirstName =pm.environment.get(\"FstName\");//from environment\r",
+									"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+									"    pm.expect(actulFirstName).to.eql(expectedFirstName);\r",
+									"});\r",
+									"pm.test(\"Validating Objects\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+									"    pm.expect(jsonData.firstName).to.eql(pm.environment.get(\"FstName\"));\r",
+									"    pm.expect(jsonData.lastName).to.eql(pm.environment.get(\"LstName\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/BillingOrder/{{id}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"BillingOrder",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GetAllRecord",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}:{{port}}/BillingOrder",
+					"host": [
+						"{{url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"BillingOrder"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
