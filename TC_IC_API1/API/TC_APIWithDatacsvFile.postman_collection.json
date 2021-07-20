@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "48c11ec8-ebce-40c8-9e20-bacc1a141ef9",
+		"name": "TC_APIWithDatacsvFile",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PostCreatNewRecordUsingcsv",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"var jsonData=pm.response.json();\r",
+							"\r",
+							"// Setting Environment variable\r",
+							"pm.environment.set(\"id\", jsonData.id);\r",
+							"pm.environment.set(\"FstName\", jsonData.firstName);\r",
+							"pm.environment.set(\"LstName\", jsonData.lastName);\r",
+							"//validating CSV file date and poted data \r",
+							"pm.test(\"ValidateDataFromCSV\",function(){\r",
+							"    var jsonData =pm.response.json();\r",
+							"    pm.expect(jsonData.firstName).to.eql(pm.iterationData.get(\"firstname\"));\r",
+							"    pm.expect(jsonData.lastName).to.eql(pm.iterationData.get(\"lastname\"));\r",
+							"    pm.expect(jsonData.email).to.eql(pm.iterationData.get(\"email\"));\r",
+							"    pm.expect(jsonData.phone).to.eql(parseInt(pm.iterationData.get(\"phone\")));\r",
+							"    pm.expect(jsonData.city).to.eql(pm.iterationData.get(\"city\"));\r",
+							"    pm.expect(jsonData.zipCode).to.eql(pm.iterationData.get(\"zipcode\"));\r",
+							"    pm.expect(jsonData.addressLine1).to.eql(pm.iterationData.get(\"addressLine1\"));\r",
+							"    pm.expect(jsonData.addressLine2).to.eql(pm.iterationData.get(\"addressLine2\"));\r",
+							"    pm.expect(jsonData.itemNumber).to.eql(pm.iterationData.get(\"itemnumber\"));\r",
+							"pm.globals.set(\"variable_key\", \"variable_value\");\r",
+							"    pm.expect(jsonData.comment).to.eql(pm.iterationData.get(\"comment\"));\r",
+							"    pm.expect(jsonData.state).to.eql(pm.iterationData.get(\"state\"));\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"addressLine1\": \"{{addressLine1}}\",\r\n  \"addressLine2\": \"{{addressLine2}}\",\r\n  \"city\": \"{{city}}\",\r\n  \"comment\": \"{{comment}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"firstName\": \"{{firstname}}\",\r\n  \"id\": 0,\r\n  \"itemNumber\": \"{{itemnumber}}\",\r\n  \"lastName\": \"{{lastname}}\",\r\n  \"phone\": {{phone}},\r\n  \"state\": \"{{state}}\",\r\n  \"zipCode\": \"{{zipcode}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}:{{port}}/BillingOrder",
+					"host": [
+						"{{url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"BillingOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetRecordById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validating FirsName\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    var actulFirstName= jsonData.firstName;//from response\r",
+							"    var expectedFirstName =pm.environment.get(\"FstName\");//from environment\r",
+							"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+							"    pm.expect(actulFirstName).to.eql(expectedFirstName);\r",
+							"});\r",
+							"pm.test(\"Validating Objects\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    //varifaing the fist name in the responseof get cammond and the one set in the environment by the post cammond.\r",
+							"    pm.expect(jsonData.firstName).to.eql(pm.environment.get(\"FstName\"));\r",
+							"    pm.expect(jsonData.lastName).to.eql(pm.environment.get(\"LstName\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}:{{port}}/BillingOrder/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"BillingOrder",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
