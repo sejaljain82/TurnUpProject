@@ -1,0 +1,15 @@
+﻿{
+    "success": true,
+    "data": {
+        "FirstName": "Tom",
+        "LastName": "zyx",
+        "Email": "ab@ef.com",
+        "AddressLine1": "abc",
+        "AddressLine2": "abc2",
+        "PhoneNumber": "1234567890",
+        "Comment": "efg",
+        "ZipCode": "123456",
+        "id": 0
+    },
+    "message": "Billing Order saved successfully"
+}
