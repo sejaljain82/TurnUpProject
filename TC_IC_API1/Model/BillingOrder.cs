@@ -27,7 +27,7 @@ namespace TC_IC_API1.Model
             this.addressLine2 = addressLine2 ?? DataGenerator.RandomString(10);
             this.city = city ?? DataGenerator.RandomString(10);
             this.comment = comment ?? DataGenerator.RandomString(10);
-            this.email = email ?? TestContext.CurrentContext.Random.GetString()+"ef.com";
+            this.email = email ?? TestContext.CurrentContext.Random.GetString()+"@ef.com";
             this.firstName = firstName ?? DataGenerator.FullName;
             //  this.id = id;
             this.itemNumber = itemNumber ?? int.Parse(DataGenerator.RandomStringint(2));
